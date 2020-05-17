@@ -1,3 +1,6 @@
+
+
+
 function primera_Peticion(){
     
 //    var socket = new WebSocket("ws://www.sigua.ua.es/api/agregados/seo/edificio/all/items");
@@ -72,17 +75,26 @@ function segunda_Peticion(){
 
 
   
-function tercera_Peticion(vari){
-    
+function tercera_Peticion(edi){
+
   //    var socket = new WebSocket("ws://www.sigua.ua.es/api/agregados/seo/edificio/all/items");
-  
-  
-  
+ // console.log(document.getElementById("#edificio.validity.value"));
+
+//  console.log(document.getElementById("#edificio2"));
+
+ var x = edi.elements[0].value;
+
+
+//  let auxi=camb.validity.value;
+ // var auxi=document.getElementById("#edificio").value;
+
+  let vari=x;//auxi.split(",")[0];
   let xhr = new XMLHttpRequest(),
   url = 'http://www.sigua.ua.es/api/pub/estancia/edificio/'+vari+'/items';
     
   xhr.open('GET',url,true);
   xhr.onload = function(){
+
     let r = JSON.parse(xhr.responseText);
     console.log(r);
       let html='';
@@ -107,16 +119,18 @@ function tercera_Peticion(vari){
       document.querySelector('#apartado3').innerHTML = html;
   };
   xhr.send();
-
+  //window.location.reload();
+  return false;
   }
   
+
   
-function cuarta_Peticion(vari){
+function cuarta_Peticion(depa){
     
   //    var socket = new WebSocket("ws://www.sigua.ua.es/api/agregados/seo/edificio/all/items");
   
   
-  
+  vari=depa.elements[0].value;;
   let xhr = new XMLHttpRequest(),
   url = 'http://www.sigua.ua.es/api/agregados/seo/departamento/all/items';
   let contador=0;
@@ -155,6 +169,35 @@ function cuarta_Peticion(vari){
       }
 
       document.querySelector('#apartado4').innerHTML = html;
+  };
+  xhr.send();
+  return false;
+  }
+
+
+
+  function cargarOpciones(){
+      //    var socket = new WebSocket("ws://www.sigua.ua.es/api/agregados/seo/edificio/all/items");
+  
+  
+  let xhr = new XMLHttpRequest(),
+  url = 'http://www.sigua.ua.es/api/agregados/seo/edificio/all/items';
+    
+  xhr.open('GET',url,true);
+  xhr.onload = function(){
+    let r = JSON.parse(xhr.responseText);
+    
+      let html='';
+
+      r.forEach(function(e){
+        
+        html+= `<option value="${e.id.split(",")[0].substring(1)}">${e.id.substring(1, e.id.length-1)}</option>`
+
+        
+      });
+    
+      
+      document.querySelector('#items').innerHTML = html;
   };
   xhr.send();
 

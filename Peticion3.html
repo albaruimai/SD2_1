@@ -6,9 +6,24 @@
  <!-- <link rel="stylesheet" type="text/css" href="style.css">-->  
     <script type="text/javascript" src="script.js"></script>
   </head>
-  <body>
+  <body onload="cargarOpciones()">
     <p><a href="Inicio.html"><strong>Volver a la página de inicio. </strong></a></p>
 
+    <form id=edificio2 onsubmit="return tercera_Peticion(edificio2);">
+      <label for="edificio">Selecciona edificio</label><br>
+      
+ <!--
+      <input type="text" list="items" id="edificio"> 
+      Lista de opciones -->
+      <select id="items" >
+      </select>
+
+      <input type="submit" value="Enviar">
+    </form>
+
+    <div id="apartado3">
+
+    </div>
       
 
   </body>
