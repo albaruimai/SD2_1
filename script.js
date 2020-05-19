@@ -84,7 +84,7 @@ function tercera_Peticion(edi){
 
  var x = edi.elements[0].value;
 
-
+contador=0;
 //  let auxi=camb.validity.value;
  // var auxi=document.getElementById("#edificio").value;
 
@@ -107,15 +107,22 @@ function tercera_Peticion(edi){
       html+= `<th>Actividad destinada</th></tr>`
 
       r.features.forEach(function(e){
-        html+= `<tr><th>${e.properties.codigo}</th>`
-        html+= `<th>${e.properties.denominacion}</th>`
-        html+= `<th>${e.properties.superficie}</th>`
-        html+= `<th>${e.properties.activresum}</th></tr>`
+        if(e.properties.denominacion!=null&&e.properties.denominacion!=""){
+          html+= `<tr><th>${e.properties.codigo}</th>`
+          html+= `<th>${e.properties.denominacion}</th>`
+          html+= `<th>${e.properties.superficie}</th>`
+          html+= `<th>${e.properties.activresum}</th></tr>`
+          contador++;
+        }
         
         
       });
     
       html+= `</table>`
+      if(contador==0){
+        html='';
+        html+=  `<h2>No se ha encontrado ninguna estancia</h2>`
+      }
       document.querySelector('#apartado3').innerHTML = html;
   };
   xhr.send();
